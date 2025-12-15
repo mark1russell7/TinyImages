@@ -1,15 +1,39 @@
-# The Tiny Image Museum
+# The Tiny Image Experiments
 
-A collection of the smallest possible image files.
+Field test results for the smallest possible image files.
 
-| File | Size | Format | Preview (Stretched) | Renders in Browser? | Renders in OS? |
+## 🏆 The Winners (Verified)
+
+| Rank | File | Size | Format | Status | Preview (Stretched) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **pixel.wbmp** | **5 B** | WBMP | *(No Preview)* | ❌ (Dropped) | ⚠️ (Tools only) |
-| **ghost.gif** | **14 B** | GIF89a | <img src="ghost.gif" width="20" height="20" title="14 bytes"> | ✅ (Transparent) | ❌ |
-| **tiny.gif** | **26 B** | GIF89a | <img src="tiny.gif" width="20" height="20" title="26 bytes"> | ✅ (Risk of 💔) | ❌ |
-| **pixel.bmp** | **30 B** | BMP | <img src="pixel.bmp" width="20" height="20" title="30 bytes"> | ✅ | ✅ (Windows) |
-| **pixel.gif** | **35 B** | GIF89a | <img src="pixel.gif" width="20" height="20" title="35 bytes"> | ✅ | ✅ |
+| **#1** | **void.gif** | **0 B** | NULL | **Existential Win** (Shows nothing, acts as spacer) | <img src="void.gif" width="20" height="20" alt="Void"> |
+| **#2** | **void.svg** | **6 B** | XML | **The Champion.** Renders cleanly. | <img src="void.svg" width="20" height="20" alt="SVG"> |
+| **#3** | **ghost.gif** | **14 B** | GIF89a | **Browser Only.** (Git shows 💔) | <img src="ghost.gif" width="20" height="20" alt="Ghost"> |
+| **#4** | **pixel.gif** | **35 B** | GIF89a | **Reliable.** Works everywhere. | <img src="pixel.gif" width="20" height="20" alt="Pixel"> |
 
-### Notes
-* **Ghost GIF (14B):** The preview above is invisible because it is a valid 1x1 transparent canvas.
-* **WBMP (5B):** Modern browsers cannot display this, so no preview is shown.
+---
+
+## 💀 The Graveyard (Failed Exploits)
+
+These files failed to render in this environment (Windows / Git Web).
+
+| File | Size | Technique | Failure Mode |
+| :--- | :--- | :--- | :--- |
+| **risk.gif** | 10 B | Truncated Header | 💔 Broken Image |
+| **risk2.gif** | 10 B | Truncated Header | 💔 Broken Image |
+| **trailerless.gif** | 13 B | No Trailer (3B) | 💔 Broken Image |
+| **tiny.gif** | 26 B | No Palette/Footer | 💔 Broken Image |
+| **pixel.bmp** | 30 B | OS/2 Header Hack | 💔 Broken Image |
+| **pixel.tga** | 19 B | Truevision TGA | 💔 Format Unsupported |
+| **pixel.wbmp** | 5 B | Wireless Bitmap | 💔 Format Unsupported |
+
+## Hex Codes for the Winners
+
+**1. Void SVG (6 Bytes)**
+Text: `<svg/>`
+
+**2. Ghost GIF (14 Bytes)**
+Hex: `47 49 46 38 39 61 01 00 01 00 00 00 00 3B`
+
+**3. Pixel GIF (35 Bytes - The Safe Standard)**
+Hex: `47 49 46 38 39 61 01 00 01 00 80 00 00 FF FF FF 00 00 00 2C 00 00 00 00 01 00 01 00 00 02 02 44 01 00 3B`
