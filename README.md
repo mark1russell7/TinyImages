@@ -2,7 +2,7 @@
 
 Field test results for the smallest possible image files.
 
-## 🏆 The Winners (Verified)
+## 🏆 Winners
 
 | Rank | File | Size | Format | Status | Preview (Stretched) |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -13,7 +13,7 @@ Field test results for the smallest possible image files.
 
 ---
 
-## 💀 The Graveyard (Failed Exploits)
+## 💀 Failed Exploits
 
 These files failed to render in this environment (Windows / Git Web).
 
@@ -27,7 +27,7 @@ These files failed to render in this environment (Windows / Git Web).
 | **pixel.tga** | 19 B | Truevision TGA | 💔 Format Unsupported |
 | **pixel.wbmp** | 5 B | Wireless Bitmap | 💔 Format Unsupported |
 
-## Hex Codes for the Winners
+## Hex Codes
 
 **1. Void SVG (6 Bytes)**
 Text: `<svg/>`
@@ -35,5 +35,5 @@ Text: `<svg/>`
 **2. Ghost GIF (14 Bytes)**
 Hex: `47 49 46 38 39 61 01 00 01 00 00 00 00 3B`
 
-**3. Pixel GIF (35 Bytes - The Safe Standard)**
+**3. Pixel GIF (35 Bytes)**
 Hex: `47 49 46 38 39 61 01 00 01 00 80 00 00 FF FF FF 00 00 00 2C 00 00 00 00 01 00 01 00 00 02 02 44 01 00 3B`
