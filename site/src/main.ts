@@ -1,5 +1,5 @@
 // The start of the page: the theme, the first painting, the lab, the live test, the rooms, the facts and the build line.
-import { byId, h, setupTheme } from "@mark1russell7/site-pages/chrome";
+import { byId, h, setupTheme, showBuild } from "@mark1russell7/site-pages/chrome";
 import { drawPlaques, LiveTable, runWhyTable } from "./exhibits.ts";
 import { drawFacts } from "./facts.ts";
 import { Lab, presetsOf } from "./lab.ts";
@@ -34,8 +34,4 @@ void live.run().then(runWhyTable);
 
 const total = exhibits.reduce((sum, exhibit) => sum + exhibit.bytes.length, 0);
 byId("totals").textContent = `All ${exhibits.length} files of the museum, with their real bytes, are in this page: ${total} bytes.`;
-byId("build").append(
-  `Version ${__BUILD__.version}, build `,
-  __BUILD__.sha === "local" ? "local" : h("a", { href: `https://github.com/mark1russell7/TinyImages/commit/${__BUILD__.sha}` }, __BUILD__.sha),
-  ` of ${__BUILD__.date}.`,
-);
+showBuild(byId("build"), __BUILD__, "mark1russell7/TinyImages");

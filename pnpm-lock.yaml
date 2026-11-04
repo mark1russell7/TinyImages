@@ -176,8 +176,8 @@ importers:
   site:
     dependencies:
       '@mark1russell7/site-pages':
-        specifier: ^0.1.10
-        version: 0.1.10
+        specifier: ^0.2.0
+        version: 0.2.0
     devDependencies:
       '@mark1russell7/cue':
         specifier: ^2.1.1
@@ -277,8 +277,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/site-pages@0.1.10':
-    resolution: {integrity: sha512-dcMPqlWsxJ+fRvl5cZH01a+/94ujk5ogRfg5puO2JC7pvE5jq1IV48UrcbtP+zcS5r9zMUbvUVz74E9xQYY8FQ==}
+  '@mark1russell7/site-pages@0.2.0':
+    resolution: {integrity: sha512-dahr/WG5PFj/zrcTk/NvufB6N3Tswc60vvGregftq9nraEgeHhaEr+s0zr/gbcOrK7Cz2EHiyO5F2inHc2utYw==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -996,7 +996,7 @@ snapshots:
 
   '@mark1russell7/cue@2.1.1': {}
 
-  '@mark1russell7/site-pages@0.1.10': {}
+  '@mark1russell7/site-pages@0.2.0': {}
 
   '@mark1russell7/ste-lint@0.1.2':
     dependencies:
