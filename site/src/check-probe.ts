@@ -64,6 +64,8 @@ const labTile = (offset: number) => $(`#lab-tiles [data-offset="${offset}"]`);
 check("the live test ends", await until(() => $("#live-rows")?.dataset["state"] === "done", 15000));
 check("the table has each file and the data URL of the README", $$("#live-rows tr").length >= 9, $$("#live-rows tr").length);
 check("pixel.gif loads with natural size 1 x 1", row("pixel.gif")?.dataset["result"] === "loaded" && row("pixel.gif")?.dataset["natural"] === "1 x 1", row("pixel.gif")?.dataset);
+check("pixel.gif has a visible pixel on the canvas", row("pixel.gif")?.dataset["drawn"] === "true", row("pixel.gif")?.dataset["drawn"]);
+check("runme.gif has a size and no visible pixel, as its 0 GIF images say", row("runme.gif")?.dataset["drawn"] === "false" && row("runme.gif")?.querySelector(".result")?.textContent === "Loaded, no visible pixels", row("runme.gif")?.querySelector(".result")?.textContent);
 await sameAsMeasure("5.svg", textBytes("<svg>"), "image/svg+xml");
 await sameAsMeasure("void.svg", textBytes("<svg/>"), "image/svg+xml");
 await sameAsMeasure("runme.gif", hexBytes("474946383961200023000000003b"), "image/gif");

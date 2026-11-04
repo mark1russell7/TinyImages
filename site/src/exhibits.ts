@@ -14,7 +14,7 @@ export function stateWord(state: LoadResult["state"]): string {
 /** This function gives the words of a result in the live table. */
 export function resultWord(result: LoadResult): string {
   if (result.state !== "loaded") return stateWord(result.state);
-  return result.drawn ? "Loaded, with pixels" : "Loaded, no pixels";
+  return result.drawn ? "Loaded, with pixels" : "Loaded, no visible pixels";
 }
 
 /** This function gives a box that shows the result of a load. A 1 x 1 image fills the box, so a visitor can see it. */

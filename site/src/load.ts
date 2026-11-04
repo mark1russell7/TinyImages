@@ -12,7 +12,7 @@ export interface LoadResult {
   readonly height: number;
   /** The time from the start of the load to the event, in milliseconds. */
   readonly ms: number;
-  /** The value is true when the browser gave pixels to a canvas. */
+  /** The value is true when the canvas has a pixel that is not fully transparent. */
   readonly drawn: boolean;
   /** The red, green, blue and alpha values of the top-left pixel. */
   readonly pixel: readonly [number, number, number, number] | undefined;
@@ -66,8 +66,10 @@ async function paintImage(image: HTMLImageElement): Promise<Painted> {
     if (context === null) return NOT_DRAWN;
     context.imageSmoothingEnabled = false;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
-    const [r = 0, g = 0, b = 0, a = 0] = context.getImageData(0, 0, 1, 1).data;
-    return { drawn: true, pixel: [r, g, b, a], canvas };
+    const { data } = context.getImageData(0, 0, canvas.width, canvas.height);
+    const [r = 0, g = 0, b = 0, a = 0] = data;
+    // A canvas with no opaque pixel shows that the file gave a size and nothing to draw.
+    return { drawn: data.some((value, index) => index % 4 === 3 && value !== 0), pixel: [r, g, b, a], canvas };
   } catch {
     // The browser took the image but gave no pixels. The result of the load stays true.
     return NOT_DRAWN;

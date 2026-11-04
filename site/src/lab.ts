@@ -219,7 +219,7 @@ export class Lab {
     byId("lab-natural").textContent = naturalText(result);
     byId("lab-sent").textContent = type === "" ? "No type" : type;
     byId("lab-ms").textContent = `${result.ms.toFixed(1)} ms`;
-    const pixels = result.state === "loaded" && !result.drawn ? "The browser fired the load event, and it gave no pixels to a canvas." : undefined;
+    const pixels = result.state === "loaded" && !result.drawn ? "The browser fired the load event, but the canvas has no visible pixel." : undefined;
     byId("lab-notes").replaceChildren(...[pixels, this.reading.summary, ...this.reading.notes].filter((note) => note !== undefined).map((note) => h("li", {}, note)));
     this.root.dataset["bytes"] = String(bytes.length);
     this.root.dataset["natural"] = naturalText(result);
