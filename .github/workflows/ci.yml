@@ -5,7 +5,10 @@ name: CI
 
 on:
   push:
+    branches: [main]
   pull_request:
+  # A person starts a run on a branch with no pull request: gh workflow run ci.yml --ref <branch>
+  workflow_dispatch:
 
 permissions: {}
 
