@@ -1,0 +1,8 @@
+{
+  "$schema": "./node_modules/@mark1russell7/ste-lint/ste.config.schema.json",
+  "include": ["docs/*.md", "site/src/**/*.ts", "site/*.ts"],
+  "ignore": ["**/node_modules/**", "**/dist/**", "**/*.d.ts", "**/*.test.ts"],
+  "technicalNouns": ["parser", "palette", "polyglot"],
+  "technicalVerbs": [],
+  "properNouns": ["ASD", "ASD-STE100", "GitHub", "Markdown", "pnpm", "TypeScript", "Node.js", "SVG", "GIF", "ANSI", "LZW", "Unicode", "TinyImages"]
+}

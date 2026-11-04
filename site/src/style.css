@@ -1,0 +1,964 @@
+/* The style of the museum. The page is a gallery wall of pale celadon. The bytes are in a mono face, and all other text is in a
+   serif face. The one bold object is the gilded frame of the entrance. Green means taken, and red means refused. */
+:root {
+  color-scheme: light;
+  --wall: #dfe5e1;
+  --wall-deep: #cdd6d1;
+  --plaque: #fbfbf7;
+  --ink: #1b2430;
+  --muted: #4c5a64;
+  --rule: #b8c4bd;
+  --brass: #8a6a1f;
+  --brass-light: #c9a64a;
+  --brass-deep: #5d4712;
+  --accept: #116149;
+  --accept-bg: #d5ecdf;
+  --refuse: #a32036;
+  --refuse-bg: #f6dcdf;
+  --pending: #6b5a24;
+  --pending-bg: #efe8cf;
+  --mat: #1b2430;
+  --focus: #1f5fbf;
+  --serif: "Iowan Old Style", "Palatino Linotype", Palatino, "URW Palladio L", P052, Georgia, serif;
+  --mono: ui-monospace, "Cascadia Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+  --width: 72rem;
+  /* The colors of the parts of a file. */
+  --k-header: #bfd7ea;
+  --k-screen: #d5cdea;
+  --k-palette: #f1dca3;
+  --k-image: #bfe3d0;
+  --k-extension: #e6d0c0;
+  --k-pixels: #a9dbe0;
+  --k-trailer: #f0bfc8;
+  --k-tag: #bfd7ea;
+  --k-control: #d5cdea;
+  --k-text: #ecece3;
+  --k-extra: #f1dca3;
+  --k-broken: #f4a9b3;
+  --k-ink: #1b2430;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --wall: #16242b;
+    --wall-deep: #0f1b21;
+    --plaque: #1f3038;
+    --ink: #eef1ea;
+    --muted: #a9bac0;
+    --rule: #35505a;
+    --brass: #d9b65c;
+    --brass-light: #efd486;
+    --brass-deep: #7d6220;
+    --accept: #6fd6ab;
+    --accept-bg: #173e33;
+    --refuse: #ff9aa5;
+    --refuse-bg: #4a1f2a;
+    --pending: #e5cf88;
+    --pending-bg: #3b3519;
+    --focus: #8fb9ff;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --wall: #16242b;
+  --wall-deep: #0f1b21;
+  --plaque: #1f3038;
+  --ink: #eef1ea;
+  --muted: #a9bac0;
+  --rule: #35505a;
+  --brass: #d9b65c;
+  --brass-light: #efd486;
+  --brass-deep: #7d6220;
+  --accept: #6fd6ab;
+  --accept-bg: #173e33;
+  --refuse: #ff9aa5;
+  --refuse-bg: #4a1f2a;
+  --pending: #e5cf88;
+  --pending-bg: #3b3519;
+  --focus: #8fb9ff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+
+body {
+  margin: 0;
+  background: var(--wall);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.15;
+  font-weight: 600;
+  margin: 0;
+}
+
+h2 {
+  font-size: clamp(1.8rem, 5vw, 2.5rem);
+}
+
+h3 {
+  font-size: 1.35rem;
+  margin-block: 2.25rem 0.5rem;
+}
+
+h4 {
+  font-size: 1.1rem;
+}
+
+p {
+  margin: 0 0 0.75rem;
+}
+
+a {
+  color: inherit;
+  text-underline-offset: 0.15em;
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+}
+
+.keep-spaces {
+  white-space: pre-wrap;
+}
+
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 2px;
+}
+
+.skip {
+  position: absolute;
+  left: -100vw;
+  top: 0;
+  background: var(--plaque);
+  padding: 0.5rem 1rem;
+  z-index: 2;
+}
+
+.skip:focus {
+  left: 0;
+}
+
+/* The entrance. */
+.entrance {
+  background: linear-gradient(var(--wall-deep), var(--wall));
+  padding: 1rem clamp(1rem, 4vw, 2.5rem) clamp(2.5rem, 7vw, 5rem);
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+  align-items: center;
+  max-width: var(--width);
+  margin: 0 auto;
+  font-size: 1rem;
+}
+
+.links a,
+.links button {
+  min-height: 2.75rem;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+  max-width: var(--width);
+  margin: clamp(1.5rem, 5vw, 3.5rem) auto 0;
+}
+
+h1 {
+  font-size: clamp(2.6rem, 9vw, 4.75rem);
+  letter-spacing: -0.01em;
+  margin-bottom: 1rem;
+}
+
+.lead {
+  font-size: clamp(1.2rem, 3vw, 1.45rem);
+  line-height: 1.45;
+  max-width: 34em;
+}
+
+.lead-note {
+  color: var(--muted);
+  max-width: 36em;
+}
+
+.start {
+  display: inline-block;
+  background: var(--ink);
+  color: var(--wall);
+  padding: 0.7rem 1.25rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.masterpiece {
+  margin: 0;
+}
+
+.frame {
+  padding: clamp(0.9rem, 3vw, 1.5rem);
+  background:
+    linear-gradient(135deg, var(--brass-light), var(--brass) 45%, var(--brass-deep) 70%, var(--brass-light));
+  box-shadow:
+    inset 0 0 0 2px var(--brass-deep),
+    0 18px 32px -18px rgb(10 20 25 / 0.65);
+}
+
+.mat {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: var(--mat);
+  box-shadow: inset 0 0 0 1px var(--brass-deep);
+  display: grid;
+  place-items: center;
+}
+
+/* The one real pixel of the entrance. It stays at its true size. */
+#hero-pixel {
+  display: block;
+  width: 1px;
+  height: 1px;
+  image-rendering: pixelated;
+}
+
+.tick {
+  position: absolute;
+  background: #d9dfdb;
+}
+
+.tick-n,
+.tick-s {
+  left: 50%;
+  width: 1px;
+  height: 14%;
+}
+
+.tick-e,
+.tick-w {
+  top: 50%;
+  height: 1px;
+  width: 11%;
+}
+
+.tick-n {
+  top: 26%;
+}
+
+.tick-s {
+  bottom: 26%;
+}
+
+.tick-e {
+  right: 28%;
+}
+
+.tick-w {
+  left: 28%;
+}
+
+.placard {
+  background: var(--plaque);
+  max-width: 24rem;
+  margin: 1rem 0 0 auto;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.95rem;
+  line-height: 1.4;
+  box-shadow: 0 1px 0 var(--rule);
+}
+
+@media (min-width: 860px) {
+  .hero {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr);
+  }
+}
+
+/* The sections. */
+.gallery {
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: clamp(2rem, 6vw, 3.5rem) clamp(1rem, 4vw, 2.5rem);
+}
+
+.intro {
+  max-width: 44em;
+  color: var(--muted);
+}
+
+.intro code,
+.lead-note code {
+  color: var(--ink);
+}
+
+button,
+select,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  background: var(--plaque);
+  border: 1px solid var(--rule);
+  padding: 0.45rem 0.8rem;
+  min-height: 2.75rem;
+  cursor: pointer;
+}
+
+button:hover:not(:disabled) {
+  border-color: var(--ink);
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: progress;
+}
+
+button.primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--wall);
+  font-weight: 600;
+}
+
+button.inline {
+  background: none;
+  border: 0;
+  padding: 0 0.25rem;
+  min-height: 2.75rem;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+button.quiet {
+  background: none;
+  border: 0;
+  padding: 0;
+  text-decoration: underline;
+  text-underline-offset: 0.15em;
+}
+
+/* The lab. */
+.bench {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .bench {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+    align-items: start;
+  }
+
+  .verdict {
+    position: sticky;
+    top: 1rem;
+  }
+}
+
+.workbench,
+.verdict,
+.room,
+.plaque {
+  background: var(--plaque);
+  padding: clamp(0.9rem, 3vw, 1.4rem);
+  min-width: 0;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 1rem;
+}
+
+.chip {
+  font-size: 0.92rem;
+  min-height: 2.75rem;
+  padding: 0.3rem 0.65rem;
+}
+
+.chip.retired {
+  border-style: dashed;
+}
+
+.field {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.bytes-input {
+  width: 100%;
+  font-family: var(--mono);
+  font-size: 1rem;
+  padding: 0.6rem 0.65rem;
+  background: var(--wall);
+  border: 1px solid var(--rule);
+  margin-bottom: 1rem;
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(2.6rem, 1fr));
+  gap: 3px;
+}
+
+.tile {
+  min-height: 3rem;
+  min-width: 0;
+  padding: 0.15rem 0;
+  border: 2px solid transparent;
+  color: var(--k-ink);
+  font-family: var(--mono);
+  line-height: 1.2;
+  display: grid;
+  place-content: center;
+  gap: 0.1rem;
+  text-align: center;
+}
+
+.tile b {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.tile i {
+  font-style: normal;
+  font-size: 0.75rem;
+  opacity: 0.75;
+}
+
+.tile:hover:not(:disabled) {
+  border-color: var(--k-ink);
+}
+
+.tile.picked {
+  border-color: var(--k-ink);
+  box-shadow: 0 0 0 2px var(--plaque), 0 0 0 4px var(--ink);
+}
+
+.tile.keeps {
+  border-style: dashed;
+  border-color: var(--k-ink);
+}
+
+.tile.breaks {
+  border-color: var(--refuse);
+}
+
+.kind-header {
+  background: var(--k-header);
+}
+
+.kind-screen {
+  background: var(--k-screen);
+}
+
+.kind-palette {
+  background: var(--k-palette);
+}
+
+.kind-image {
+  background: var(--k-image);
+}
+
+.kind-extension {
+  background: var(--k-extension);
+}
+
+.kind-pixels {
+  background: var(--k-pixels);
+}
+
+.kind-trailer {
+  background: var(--k-trailer);
+}
+
+.kind-tag {
+  background: var(--k-tag);
+}
+
+.kind-control {
+  background: var(--k-control);
+}
+
+.kind-text {
+  background: var(--k-text);
+}
+
+.kind-extra {
+  background: var(--k-extra);
+}
+
+.kind-broken {
+  background: var(--k-broken);
+}
+
+.detail {
+  min-height: 4.8em;
+  margin: 0.75rem 0;
+  padding: 0.5rem 0.65rem;
+  background: var(--wall);
+  font-size: 1rem;
+}
+
+.detail em {
+  font-style: normal;
+  font-weight: 600;
+}
+
+.tools {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.hexfield,
+.typefield {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.hexfield input {
+  width: 3.2rem;
+  min-height: 2.75rem;
+  font-family: var(--mono);
+  font-size: 1rem;
+  text-align: center;
+  background: var(--wall);
+  border: 1px solid var(--rule);
+}
+
+.typefield select {
+  max-width: 11rem;
+  min-height: 2.75rem;
+  background: var(--plaque);
+  border: 1px solid var(--rule);
+  font-size: 1rem;
+}
+
+.status {
+  color: var(--muted);
+  min-height: 1.6em;
+  margin: 0.5rem 0 0;
+}
+
+.verdict {
+  border-top: 8px solid var(--pending);
+}
+
+.verdict[data-state="loaded"] {
+  border-top-color: var(--accept);
+}
+
+.verdict[data-state="refused"],
+.verdict[data-state="timeout"] {
+  border-top-color: var(--refuse);
+}
+
+.verdict-word {
+  font-size: clamp(1.45rem, 4vw, 1.8rem);
+  line-height: 1.2;
+  font-weight: 600;
+}
+
+.verdict[data-state="loaded"] .verdict-word {
+  color: var(--accept);
+}
+
+.verdict[data-state="refused"] .verdict-word,
+.verdict[data-state="timeout"] .verdict-word {
+  color: var(--refuse);
+}
+
+/* The box of an image. The checks show where a transparent image ends, and the frame shows a 1 x 1 image. */
+.specimen {
+  width: 3.5rem;
+  height: 3.5rem;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--brass);
+  background: repeating-conic-gradient(var(--wall-deep) 0 25%, var(--plaque) 0 50%) 0 0 / 12px 12px;
+}
+
+.specimen.large {
+  width: min(100%, 11rem);
+  height: 11rem;
+  margin-bottom: 0.75rem;
+}
+
+.specimen canvas {
+  image-rendering: pixelated;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.no-image {
+  font-size: 0.8rem;
+  line-height: 1.1;
+  text-align: center;
+  background: var(--plaque);
+  padding: 0.1rem 0.2rem;
+}
+
+.numbers {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.25rem 1rem;
+  margin: 0 0 0.75rem;
+}
+
+.numbers dt {
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.numbers dd {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: 0.95rem;
+}
+
+.notes {
+  margin: 0 0 0.75rem;
+  padding-left: 1.1rem;
+  font-size: 0.98rem;
+}
+
+.record {
+  margin: 0;
+  padding-top: 0.6rem;
+  border-top: 1px solid var(--rule);
+}
+
+/* The tables. On a phone, each row is a stack of labelled lines. */
+.table-wrap {
+  overflow-x: auto;
+  background: var(--plaque);
+  margin-top: 0.75rem;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 0.5rem 0.65rem;
+  vertical-align: middle;
+  border-bottom: 1px solid var(--rule);
+}
+
+thead th {
+  font-size: 0.95rem;
+  color: var(--muted);
+  font-weight: 600;
+}
+
+tbody tr[data-result="loaded"] .result {
+  color: var(--accept);
+  font-weight: 600;
+}
+
+tbody tr[data-result="refused"] .result,
+tbody tr[data-result="timeout"] .result {
+  color: var(--refuse);
+  font-weight: 600;
+}
+
+.pill {
+  display: inline-block;
+  padding: 0.05rem 0.5rem;
+  white-space: nowrap;
+}
+
+.pill.same {
+  background: var(--accept-bg);
+  color: var(--accept);
+}
+
+.pill.differs,
+.pill.no-entry {
+  background: var(--refuse-bg);
+  color: var(--refuse);
+}
+
+.pill.history {
+  background: var(--pending-bg);
+  color: var(--pending);
+}
+
+@media (max-width: 760px) {
+  thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  table,
+  tbody,
+  tr,
+  th,
+  td {
+    display: block;
+    width: 100%;
+  }
+
+  tbody tr {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  tbody th,
+  tbody td {
+    display: grid;
+    grid-template-columns: minmax(0, 7.5rem) minmax(0, 1fr);
+    gap: 0.5rem;
+    align-items: center;
+    border: 0;
+    padding: 0.15rem 0.65rem;
+  }
+
+  tbody th::before,
+  tbody td::before {
+    content: attr(data-label);
+    color: var(--muted);
+    font-size: 0.95rem;
+    font-weight: 400;
+  }
+}
+
+/* The plaques. */
+.plaques {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.plaque {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 800px) {
+  .plaque {
+    grid-template-columns: minmax(0, 15rem) minmax(0, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+.plaque-label h4 {
+  font-family: var(--mono);
+  font-size: 1.05rem;
+}
+
+.size {
+  color: var(--brass);
+  font-weight: 600;
+  margin: 0.1rem 0 0.4rem;
+}
+
+.note {
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+/* The rooms. */
+.room {
+  margin-top: 1rem;
+}
+
+.room h3 {
+  margin-top: 0;
+}
+
+.pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1rem;
+}
+
+@media (min-width: 760px) {
+  .pair {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+.pair h4 {
+  margin-bottom: 0.5rem;
+}
+
+.reveal {
+  font-size: 1.15rem;
+}
+
+.reveal strong {
+  font-family: var(--mono);
+  background: var(--k-palette);
+  color: var(--k-ink);
+  padding: 0 0.3rem;
+  white-space: pre;
+}
+
+.swatch {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin-bottom: 0.35rem;
+}
+
+.chip-color {
+  flex: none;
+  width: 1.75rem;
+  height: 1.75rem;
+  border: 1px solid var(--ink);
+}
+
+.tokens {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+}
+
+.tokens li {
+  padding: 0.3rem 0.5rem;
+  background: var(--wall);
+  margin-bottom: 3px;
+}
+
+.tokens code {
+  font-weight: 600;
+}
+
+.name-demo {
+  font-size: 1.35rem;
+  background: var(--wall);
+  padding: 0.65rem 0.8rem;
+}
+
+.name-demo bdi {
+  font-family: var(--mono);
+  background: var(--k-palette);
+  color: var(--k-ink);
+  padding: 0 0.3rem;
+}
+
+.terminals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-bottom: 0.75rem;
+}
+
+.terminal-figure {
+  margin: 0;
+}
+
+.terminal-figure figcaption {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
+.terminal {
+  display: inline-flex;
+  gap: 0.6ch;
+  font-family: var(--mono);
+  font-size: 1.5rem;
+  padding: 0.4rem 0.8rem;
+  min-width: 9rem;
+  white-space: pre;
+}
+
+.terminal.dark {
+  background: #10161a;
+  color: #e7ece8;
+}
+
+.terminal.light {
+  background: #f6f6f1;
+  color: #10161a;
+  box-shadow: inset 0 0 0 1px #b8c4bd;
+}
+
+.terminal.dark .reverse {
+  background: #e7ece8;
+  color: #10161a;
+}
+
+.terminal.light .reverse {
+  background: #10161a;
+  color: #f6f6f1;
+}
+
+.empty-frame {
+  width: 8rem;
+  aspect-ratio: 4 / 3;
+  border: 10px solid var(--brass);
+  background: var(--wall);
+  margin-bottom: 0.6rem;
+}
+
+.empty-exhibit h4 {
+  font-family: var(--mono);
+}
+
+.findings {
+  max-width: 46em;
+  padding-left: 1.2rem;
+  margin: 0.5rem 0 0;
+}
+
+.findings li {
+  margin-bottom: 0.5rem;
+}
+
+.foot {
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 3rem;
+  color: var(--muted);
+  font-size: 0.98rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}

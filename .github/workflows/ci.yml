@@ -1,0 +1,49 @@
+# The CI of this repository. The job ci is the shared CI of mark1russell7 (reusable-ci.yml of mark1russell7/template,
+# its CI.md). It runs each standard script that package.json has: typecheck, check:conventions, test, the build of the
+# site and lint:ste. The tests read the real files of the museum. No job runs a file of the museum.
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions: {}
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  ci:
+    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@21c4cb628bc2e0e1be5b21fa92fd3c688400ecab # main
+    permissions:
+      contents: read
+
+  # The one check of a ruleset of main (CI.md of mark1russell7/template, "The check of the ruleset").
+  # It passes only when each job of needs passed, or was skipped by its own if and ALLOW_SKIP names it.
+  ci-ok:
+    name: CI OK
+    if: always()
+    needs: [ci]
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    permissions: {}
+    steps:
+      - name: Each job passed
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+          # The jobs that their own if may skip, separated by spaces. Each other job must pass.
+          ALLOW_SKIP: ""
+        run: |
+          echo "$NEEDS" | jq -r 'to_entries[] | "\(.key) \(.value.result)"' > results
+          cat results
+          if [ ! -s results ]; then echo "::error::no job in needs"; exit 1; fi
+          bad=0
+          while read -r job result; do
+            case "$result" in
+              success) ;;
+              skipped) case " $ALLOW_SKIP " in *" $job "*) ;; *) echo "::error::$job was skipped, and ALLOW_SKIP does not name it"; bad=1 ;; esac ;;
+              *) echo "::error::$job: $result"; bad=1 ;;
+            esac
+          done < results
+          exit $bad

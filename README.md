@@ -2,6 +2,8 @@
 
 A research repository pushing the limits of file formats, browser parsers, and Git rendering.
 
+Try it live: the site of the museum tests each file in your browser and has a shrink lab, at https://mark1russell7.github.io/TinyImages/.
+
 ## S Tier
 | File | Size | Format | The Trick | Git Render? |
 | :--- | :--- | :--- | :--- | :--- |

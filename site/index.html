@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>The Tiny Image Museum: the smallest files that image parsers take</title>
+    <meta name="description" content="The real files of the Tiny Image Museum, tested live in your browser. Read each byte, then remove bytes in the shrink lab and try to beat the record." />
+    <meta name="color-scheme" content="light dark" />
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%238a6a1f'/%3E%3Crect x='4' y='4' width='24' height='24' fill='%231b2430'/%3E%3Crect x='14' y='14' width='4' height='4' fill='%23fff'/%3E%3C/svg%3E" />
+    <script>
+      // The saved theme applies before the first paint, so a dark page does not flash white.
+      try {
+        const t = localStorage.getItem("tinyimages-theme");
+        if (t === "light" || t === "dark") document.documentElement.dataset.theme = t;
+      } catch {}
+    </script>
+  </head>
+  <body>
+    <a class="skip" href="#lab">Skip to the shrink lab</a>
+    <header class="entrance">
+      <nav class="links" aria-label="Site">
+        <a href="#lab">Shrink lab</a>
+        <a href="#exhibits">Exhibits</a>
+        <a href="#facts">Facts</a>
+        <a href="releases/">Releases</a>
+        <a href="status/">Status</a>
+        <a href="https://github.com/mark1russell7/TinyImages">GitHub</a>
+        <button id="theme" type="button" class="quiet"></button>
+      </nav>
+      <div class="hero">
+        <div class="hero-text">
+          <h1>The Tiny Image Museum</h1>
+          <p class="lead">The smallest files that image parsers take. Each exhibit is the real file from the repository, and your own browser does the test.</p>
+          <p class="lead-note">Remove a byte and see if the image lives. The record to beat is on the wall of the lab.</p>
+          <p><a class="start" href="#lab">Start the shrink lab</a></p>
+        </div>
+        <figure class="masterpiece">
+          <div class="frame">
+            <div class="mat" id="hero-mat">
+              <span class="tick tick-n" aria-hidden="true"></span>
+              <span class="tick tick-e" aria-hidden="true"></span>
+              <span class="tick tick-s" aria-hidden="true"></span>
+              <span class="tick tick-w" aria-hidden="true"></span>
+            </div>
+          </div>
+          <figcaption class="placard" id="hero-placard"></figcaption>
+        </figure>
+      </div>
+    </header>
+
+    <main>
+      <section id="lab" class="gallery" aria-labelledby="lab-title">
+        <h2 id="lab-title">The shrink lab</h2>
+        <p class="intro">Change the bytes. After each change, the page loads the result as an image and shows if your browser still takes it. Type <code>&lt;svg</code> to see the file that the F tier of the README lost.</p>
+        <div class="bench">
+          <div class="workbench">
+            <div class="chips" id="lab-presets" role="group" aria-label="Start from a file"></div>
+            <label class="field" for="lab-text">Bytes as text. Write other bytes as <code>\xNN</code>.</label>
+            <input id="lab-text" class="bytes-input" type="text" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" />
+            <div class="tiles" id="lab-tiles" role="group" aria-label="The bytes of the file in the lab"></div>
+            <p class="detail" id="lab-detail" aria-live="polite"></p>
+            <div class="tools" role="group" aria-label="Edit the selected byte">
+              <button id="lab-remove" type="button" class="primary">Remove byte</button>
+              <label class="hexfield">Value <input id="lab-value" type="text" maxlength="2" value="00" spellcheck="false" autocapitalize="off" autocomplete="off" aria-label="New byte value in hex" /></label>
+              <button id="lab-change" type="button">Change byte</button>
+              <button id="lab-insert" type="button">Insert before</button>
+              <button id="lab-undo" type="button">Undo</button>
+              <button id="lab-reset" type="button">Reset</button>
+            </div>
+            <div class="tools" role="group" aria-label="Let the page test the bytes">
+              <button id="lab-each" type="button">Test each byte</button>
+              <button id="lab-shrink" type="button">Shrink it for me</button>
+              <label class="typefield">Send as
+                <select id="lab-type">
+                  <option value="auto">Type from the bytes</option>
+                  <option value="image/svg+xml">image/svg+xml</option>
+                  <option value="image/gif">image/gif</option>
+                  <option value="">No type</option>
+                </select>
+              </label>
+            </div>
+            <p class="status" id="lab-progress" aria-live="polite"></p>
+          </div>
+          <aside class="verdict" id="lab-verdict" data-state="running" aria-live="polite">
+            <p class="verdict-word" id="lab-word">Testing</p>
+            <div class="specimen large" id="lab-preview"></div>
+            <dl class="numbers">
+              <div><dt>Bytes</dt><dd id="lab-bytes"></dd></div>
+              <div><dt>Natural size</dt><dd id="lab-natural"></dd></div>
+              <div><dt>Sent as</dt><dd id="lab-sent"></dd></div>
+              <div><dt>Time</dt><dd id="lab-ms"></dd></div>
+            </dl>
+            <ul class="notes" id="lab-notes"></ul>
+            <p class="record" id="lab-record"></p>
+          </aside>
+        </div>
+      </section>
+
+      <section id="exhibits" class="gallery" aria-labelledby="exhibits-title">
+        <h2 id="exhibits-title">Does your browser take it?</h2>
+        <p class="intro"><span id="browser-line">The page tests each file in your browser.</span> <button id="retest" type="button" class="inline">Test again</button></p>
+        <div class="table-wrap" id="live-wrap">
+          <table class="live">
+            <thead>
+              <tr><th scope="col">File</th><th scope="col">Bytes</th><th scope="col">Sent as</th><th scope="col">Result</th><th scope="col">Natural size</th><th scope="col">Image</th><th scope="col">Time</th></tr>
+            </thead>
+            <tbody id="live-rows"></tbody>
+          </table>
+        </div>
+        <h3>Why an SVG passes or fails</h3>
+        <p class="intro">The same test on four small SVG texts. Only the namespace and the closing slash change.</p>
+        <div class="table-wrap" id="why-wrap">
+          <table class="why">
+            <thead>
+              <tr><th scope="col">Text</th><th scope="col">Bytes</th><th scope="col">Result</th><th scope="col">Natural size</th></tr>
+            </thead>
+            <tbody id="why-rows"></tbody>
+          </table>
+        </div>
+        <p class="status" id="why-line" aria-live="polite"></p>
+        <h3>Each file, byte by byte</h3>
+        <p class="intro">Hover over a byte or press it. A parser in this page reads the real bytes and labels each one.</p>
+        <div class="plaques" id="gallery"></div>
+      </section>
+
+      <section id="rooms" class="gallery" aria-labelledby="rooms-title">
+        <h2 id="rooms-title">The side rooms</h2>
+        <article class="room" id="secret-room">
+          <h3>The hidden text of secret.gif</h3>
+          <p>This file is the same 35-byte image as <code>pixel.gif</code>, with a different palette. A palette is a list of colors. It can also hold text.</p>
+          <p><button id="secret-reveal" type="button" class="primary">Find the hidden text</button></p>
+          <div id="secret-result" class="secret-result" aria-live="polite"></div>
+        </article>
+        <article class="room" id="poly-room">
+          <h3>One file, two readings: runme.gif</h3>
+          <p>These 14 bytes are a GIF and a line of shell text. This page reads the bytes. It does not run them.</p>
+          <div class="pair">
+            <div>
+              <h4>A GIF reader</h4>
+              <div class="tiles" id="poly-tiles" role="group" aria-label="The bytes of runme.gif"></div>
+              <p class="detail" id="poly-detail" aria-live="polite"></p>
+            </div>
+            <div>
+              <h4>A shell lexer</h4>
+              <ol class="tokens" id="poly-shell"></ol>
+              <p id="poly-note"></p>
+            </div>
+          </div>
+        </article>
+        <article class="room" id="name-room">
+          <h3>The name that reverses</h3>
+          <p id="name-fact"></p>
+          <p class="name-demo" id="name-demo"></p>
+          <p id="name-points"></p>
+        </article>
+        <article class="room" id="ansi-room">
+          <h3>A pixel in a terminal: pixel.ansi</h3>
+          <p>This file is an escape code. This page labels its bytes and draws the result. It writes nothing to a terminal.</p>
+          <div class="tiles" id="ansi-tiles" role="group" aria-label="The bytes of pixel.ansi"></div>
+          <p class="detail" id="ansi-detail" aria-live="polite"></p>
+          <div class="terminals" id="ansi-terminals"></div>
+          <p id="ansi-note"></p>
+        </article>
+        <article class="room" id="empty-room">
+          <h3>Two empty frames</h3>
+          <div class="pair" id="empty-frames"></div>
+        </article>
+      </section>
+
+      <section id="facts" class="gallery" aria-labelledby="facts-title">
+        <h2 id="facts-title">The README against the bytes</h2>
+        <p class="intro">The page reads the README and compares each listed size with the real file. The museum files stay as they are.</p>
+        <div class="table-wrap" id="facts-wrap">
+          <table class="facts">
+            <thead>
+              <tr><th scope="col">File</th><th scope="col">The README says</th><th scope="col">The repository has</th><th scope="col">Verdict</th></tr>
+            </thead>
+            <tbody id="facts-rows"></tbody>
+          </table>
+        </div>
+        <h3>What the sizes do not show</h3>
+        <ul class="findings" id="findings"></ul>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <p id="totals"></p>
+      <p id="build"></p>
+    </footer>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

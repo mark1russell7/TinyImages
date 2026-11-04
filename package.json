@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json.schemastore.org/package",
+  "name": "tinyimages",
+  "version": "0.1.0",
+  "private": true,
+  "description": "The Tiny Image Museum: the smallest files that parsers accept, and a site that tests them in your browser.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mark1russell7/TinyImages.git"
+  },
+  "type": "module",
+  "packageManager": "pnpm@12.10.1",
+  "engines": {
+    "node": ">=22.18"
+  },
+  "scripts": {
+    "typecheck": "pnpm --filter @tinyimages/site run typecheck",
+    "test": "pnpm --filter @tinyimages/site run test",
+    "lint:ste": "ste-lint",
+    "check:conventions": "conventions check"
+  },
+  "devDependencies": {
+    "@mark1russell7/conventions": "^0.25.0",
+    "@mark1russell7/ste-lint": "^0.1.2"
+  },
+  "conventions": {
+    "rules": {
+      "license-file": {
+        "off": "The repository has no license, and the choice of a license is for its owner. This rule stays off until the owner decides."
+      }
+    }
+  }
+}
