@@ -22,7 +22,7 @@ defaults:
 
 jobs:
   ci:
-    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@993f83398c4df4bfc8e990d037f14510316e0cfc # main
+    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@172879e6d522c13185b691c0f05071e563a4a760 # main
     permissions:
       contents: read
 
