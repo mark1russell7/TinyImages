@@ -167,17 +167,17 @@ importers:
   .:
     devDependencies:
       '@mark1russell7/conventions':
-        specifier: ^0.36.1
-        version: 0.36.1
+        specifier: ^0.38.1
+        version: 0.38.1
       '@mark1russell7/ste-lint':
-        specifier: ^0.1.2
-        version: 0.1.3
+        specifier: ^0.3.0
+        version: 0.3.0
 
   site:
     dependencies:
       '@mark1russell7/site-pages':
-        specifier: ^0.3.4
-        version: 0.3.5
+        specifier: ^0.4.1
+        version: 0.4.1
     devDependencies:
       '@mark1russell7/cue':
         specifier: ^2.1.1
@@ -267,8 +267,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@mark1russell7/conventions@0.36.1':
-    resolution: {integrity: sha512-Fb9YVVIYWTYX/+2yvtubLB4a0ognZrCs2Gy+U7RARQ9GP9jF1h4oqH5pDZiao1MUOYH070xOerUBqL4PsqnBGQ==}
+  '@mark1russell7/conventions@0.38.1':
+    resolution: {integrity: sha512-dwx/vii02hjaGvB96IrgvXZjM/Ri46FAhNZQoCgoOSbeXYHVD1A1YPG/eXvZJ5geehJwf0WM05aUPAzggntnOA==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -285,13 +285,13 @@ packages:
     resolution: {integrity: sha512-J/hfIHyiVlguOZVfA6/B7L3ReAQAW1xUbT50e4KVxMCOHJfTVC1HIj0u+Qd+Vrn+J1JoDhAF/DJ7Elfpe12gjw==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/site-pages@0.3.5':
-    resolution: {integrity: sha512-3/VryGHcANgpTwAdAeyWL08I2qpfyUoXCVBUYtzjRQDpGT4i/wCUgJpAziiJrhY5g8HDOOsKgP/9Nf+kGh0a7Q==}
+  '@mark1russell7/site-pages@0.4.1':
+    resolution: {integrity: sha512-YYPPHH3ee6No2VL+yl+mholtu7m1qdZWTf5ldYLxxZyyrsE55rPFHwIPZOnkxH6OJ7GtzqUn37/cfOg7UJqP9A==}
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/ste-lint@0.1.3':
-    resolution: {integrity: sha512-wDsYHFooJpEtyrKwcmTcvmIG2USVyIplEclYXNz8/WZoBDlbDlIDY7OWNxxMAHee0VKkHspQ/ZYxbrrO+9vvuQ==}
+  '@mark1russell7/ste-lint@0.3.0':
+    resolution: {integrity: sha512-Z5GuoAvFk9Vf4tnN/XTHiffbU2SjtZb0EtcQsLJlSAApkXovQZTPOtCFyvRbcU+qMINiXJMXppwolSsxya6s8A==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -1005,7 +1005,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@mark1russell7/conventions@0.36.1':
+  '@mark1russell7/conventions@0.38.1':
     dependencies:
       yaml: 2.9.1
 
@@ -1017,11 +1017,11 @@ snapshots:
     dependencies:
       '@mark1russell7/rigor-generators': 0.1.5
 
-  '@mark1russell7/site-pages@0.3.5':
+  '@mark1russell7/site-pages@0.4.1':
     dependencies:
       '@mark1russell7/rigor-statistics': 0.1.9
 
-  '@mark1russell7/ste-lint@0.1.3':
+  '@mark1russell7/ste-lint@0.3.0':
     dependencies:
       typescript: 6.0.3
 
