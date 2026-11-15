@@ -1,0 +1,61 @@
+# A probe of the queue of the template (draft pull request, not for merge). It does what the queue does: update-branch
+# with GITHUB_TOKEN. GitHub holds the pull_request runs of the new head for approval. Then the probe tries to start
+# the run of "Queue probe A" with the endpoint approve, and the run of "Queue probe B" with the endpoint rerun, both
+# with GITHUB_TOKEN. It writes each HTTP status and the state of each run after the call.
+name: Queue probe
+
+on:
+  pull_request:
+    types: [opened, reopened]
+
+permissions: {}
+
+jobs:
+  probe:
+    if: github.actor != 'github-actions[bot]' && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+      pull-requests: write
+      actions: write
+    env:
+      GH_TOKEN: ${{ github.token }}
+      REPO: ${{ github.repository }}
+      PR: ${{ github.event.pull_request.number }}
+      OLD: ${{ github.event.pull_request.head.sha }}
+    steps:
+      - name: update-branch with GITHUB_TOKEN, then approve and rerun the held runs
+        shell: bash
+        run: |
+          set -u
+          echo "== update-branch of #$PR from $OLD"
+          gh api -i -X PUT "repos/$REPO/pulls/$PR/update-branch" -f expected_head_sha="$OLD" 2>&1 | grep -E '^HTTP|"message"' | head -2
+          NEW="$OLD"
+          for i in $(seq 1 24); do
+            sleep 5
+            NEW=$(gh api "repos/$REPO/pulls/$PR" --jq .head.sha)
+            [ "$NEW" != "$OLD" ] && break
+          done
+          echo "== new head $NEW"
+          [ "$NEW" = "$OLD" ] && { echo "The head did not change."; exit 1; }
+          A=""; B=""
+          for i in $(seq 1 30); do
+            sleep 5
+            A=$(gh api "repos/$REPO/actions/runs?head_sha=$NEW&event=pull_request&per_page=100" --jq '[.workflow_runs[] | select(.name == "Queue probe A") | .id][0] // empty')
+            B=$(gh api "repos/$REPO/actions/runs?head_sha=$NEW&event=pull_request&per_page=100" --jq '[.workflow_runs[] | select(.name == "Queue probe B") | .id][0] // empty')
+            [ -n "$A" ] && [ -n "$B" ] && break
+          done
+          sleep 10
+          echo "== the runs of the new head, before the calls"
+          gh api "repos/$REPO/actions/runs?head_sha=$NEW&per_page=100" --jq '.workflow_runs[] | "\(.id) \(.name) event=\(.event) status=\(.status) conclusion=\(.conclusion) actor=\(.actor.login) trigger=\(.triggering_actor.login)"'
+          [ -z "$A" ] || [ -z "$B" ] && { echo "No run of A or B on the new head."; exit 1; }
+          echo "== approve run $A (Queue probe A)"
+          gh api -i -X POST "repos/$REPO/actions/runs/$A/approve" 2>&1 | grep -E '^HTTP|"message"' | head -2
+          echo "== rerun run $B (Queue probe B)"
+          gh api -i -X POST "repos/$REPO/actions/runs/$B/rerun" 2>&1 | grep -E '^HTTP|"message"' | head -2
+          sleep 60
+          echo "== the runs of the new head, 60 s after the calls"
+          gh api "repos/$REPO/actions/runs?head_sha=$NEW&per_page=100" --jq '.workflow_runs[] | "\(.id) \(.name) event=\(.event) status=\(.status) conclusion=\(.conclusion) attempt=\(.run_attempt) trigger=\(.triggering_actor.login)"'
+          echo "== the checks of the pull request"
+          gh pr view "$PR" -R "$REPO" --json statusCheckRollup --jq '.statusCheckRollup[]? | "\(.name) \(.status) \(.conclusion)"'
