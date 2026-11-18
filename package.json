@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@mark1russell7/conventions": "^0.46.2",
-    "@mark1russell7/ste-lint": "^0.3.0",
+    "@mark1russell7/ste-lint": "^0.4.0",
     "@vitest/coverage-v8": "^5.0.3"
   },
   "conventions": {
