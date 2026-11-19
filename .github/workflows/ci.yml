@@ -22,14 +22,14 @@ defaults:
 
 jobs:
   ci:
-    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@fbce036f6c00cad140ac9fb0100c88b13c1f6ddd # main
+    uses: mark1russell7/template/.github/workflows/reusable-ci.yml@afc3a844abdf898aa6439835fbde1c49a0566e17 # main
     permissions:
       contents: read
 
   # The site of .github/site.json: the build, the site check and the probe, with no deploy (CI.md of the
   # template, "The site config"). The Pages workflow deploys the same site from main.
   site:
-    uses: mark1russell7/template/.github/workflows/reusable-pages-check.yml@fbce036f6c00cad140ac9fb0100c88b13c1f6ddd # main
+    uses: mark1russell7/template/.github/workflows/reusable-pages-check.yml@afc3a844abdf898aa6439835fbde1c49a0566e17 # main
     permissions:
       contents: read
 
