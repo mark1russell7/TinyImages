@@ -20,7 +20,7 @@
     "check:conventions": "conventions check"
   },
   "devDependencies": {
-    "@mark1russell7/conventions": "^0.49.0",
+    "@mark1russell7/conventions": "^0.50.3",
     "@mark1russell7/ste-lint": "^0.4.0",
     "@vitest/coverage-v8": "^5.0.3"
   },
