@@ -167,8 +167,8 @@ importers:
   .:
     devDependencies:
       '@mark1russell7/conventions':
-        specifier: ^0.49.0
-        version: 0.49.0
+        specifier: ^0.50.3
+        version: 0.50.3
       '@mark1russell7/ste-lint':
         specifier: ^0.4.0
         version: 0.4.0
@@ -291,8 +291,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@mark1russell7/conventions@0.49.0':
-    resolution: {integrity: sha512-nSuJfGKy8ATorRwPbSa7jywQeRFI+9DzDqE3Pd0N/kXIRXTFjzuRcAajcGyTyjjP3wm8eyVL3ItHG3yZt/v/eA==}
+  '@mark1russell7/conventions@0.50.3':
+    resolution: {integrity: sha512-c2gUFJPOHmFomTsn7ml7EON5QN1p+fQ6C065w4Nm1Za3AgQD1KB9B10wr3IaDC2HHfF95FajX3CVAUw4iJar1g==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -1082,7 +1082,7 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@mark1russell7/conventions@0.49.0':
+  '@mark1russell7/conventions@0.50.3':
     dependencies:
       '@mark1russell7/text': 0.0.17
       yaml: 2.9.1
