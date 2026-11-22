@@ -49,4 +49,4 @@ jobs:
         with:
           sparse-checkout: .github/actions
           persist-credentials: false
-      - uses: mark1russell7/template/.github/actions/security-scan@302dba500de37c380eb0cc2b6f52e78f39130e55 # main
+      - uses: mark1russell7/template/.github/actions/security-scan@130d7d6038dfa2e32fb0d6f01c385f22046a752f # main
