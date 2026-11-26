@@ -19,6 +19,9 @@
     "lint:ste": "ste-lint",
     "check:conventions": "conventions check"
   },
+  "sitePages": {
+    "bareErrors": "fail"
+  },
   "devDependencies": {
     "@mark1russell7/conventions": "^0.53.1",
     "@mark1russell7/ste-lint": "^0.6.0",
