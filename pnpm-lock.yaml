@@ -167,8 +167,8 @@ importers:
   .:
     devDependencies:
       '@mark1russell7/conventions':
-        specifier: ^0.53.1
-        version: 0.53.1
+        specifier: ^0.54.0
+        version: 0.54.0
       '@mark1russell7/ste-lint':
         specifier: ^0.6.0
         version: 0.6.0
@@ -180,7 +180,7 @@ importers:
     dependencies:
       '@mark1russell7/site-pages':
         specifier: ^0.8.0
-        version: 0.8.6
+        version: 0.8.7
     devDependencies:
       '@mark1russell7/cue':
         specifier: ^2.1.1
@@ -291,8 +291,8 @@ packages:
   '@jridgewell/trace-mapping@0.3.31':
     resolution: {integrity: sha512-zzNR+SdQSDJzc8joaeP8QQoCQr8NuYx2dIIytl1QeBEZHJ9uW6hebsrYgbz8hJwUQao3TWCMtmfV8Nu1twOLAw==}
 
-  '@mark1russell7/conventions@0.53.1':
-    resolution: {integrity: sha512-rywU3MGbWOX5G5bmEpr0QdHyVs1X3IePJDdC4ALjBtFW6yPCxIUdRBJjYZo+cT27rYikbQ5ZDTcQxHbndXS+Ow==}
+  '@mark1russell7/conventions@0.54.0':
+    resolution: {integrity: sha512-pqdCwKE5ejF5Bf0pYvpbykFpzW8zgBh3MCRmpiOzuXgIYCnoEPAHmPFB316BohXS9HMV6o5OJsjfXJPq+gR+Vw==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -313,8 +313,8 @@ packages:
     resolution: {integrity: sha512-jaUqrz8FmsUoR9n0MeRUIk9UTpG5QL+dF/moh+C23fyihb00LgOD42Up//1piIPVZZDiq6lua0sBcSKMwh5IFg==}
     engines: {node: '>=22'}
 
-  '@mark1russell7/site-pages@0.8.6':
-    resolution: {integrity: sha512-WX/2Sna3H1bzLSleYuKQYuzrLF7kQjSMG79Pnysw0v1mNga95t18bS82u/zfQksPiZSicXSLmR+ye5YHfYNx4w==}
+  '@mark1russell7/site-pages@0.8.7':
+    resolution: {integrity: sha512-0U814F6nv69ueZ82B+PKkHH/Y8qapXNTFo2KMchvfqBcEkYh+2eQYAGdPzJANR+xni9HJZVpeC2nu+/lCeaEDQ==}
     engines: {node: '>=22'}
     hasBin: true
 
@@ -323,8 +323,8 @@ packages:
     engines: {node: '>=22'}
     hasBin: true
 
-  '@mark1russell7/text@0.0.19':
-    resolution: {integrity: sha512-pPJV318wzfEcsnnzlqVu+OBp/o9VLKWsAo1Wkf4rNaerOjgINDo+vErhmtPVQw6BzcVmGn4brXmMLcosCT9sAw==}
+  '@mark1russell7/text@0.0.20':
+    resolution: {integrity: sha512-HrjBak4BE0fDC+bLzFi/c4NDCHqiUm7VhYR5YhJmkApRSB8mUOao4bFiO9Jy3xwpsCGJCj4echVDCUxXjV+3NA==}
     engines: {node: '>=22.12'}
 
   '@oxc-project/types@0.156.0':
@@ -1082,9 +1082,9 @@ snapshots:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.6.0
 
-  '@mark1russell7/conventions@0.53.1':
+  '@mark1russell7/conventions@0.54.0':
     dependencies:
-      '@mark1russell7/text': 0.0.19
+      '@mark1russell7/text': 0.0.20
       yaml: 2.9.1
 
   '@mark1russell7/cue@2.1.4': {}
@@ -1097,7 +1097,7 @@ snapshots:
     dependencies:
       '@mark1russell7/rigor-generators': 0.1.16
 
-  '@mark1russell7/site-pages@0.8.6':
+  '@mark1russell7/site-pages@0.8.7':
     dependencies:
       '@mark1russell7/rigor-statistics': 0.2.5
 
@@ -1106,7 +1106,7 @@ snapshots:
       '@mark1russell7/files': 0.0.6
       typescript: 6.0.3
 
-  '@mark1russell7/text@0.0.19': {}
+  '@mark1russell7/text@0.0.20': {}
 
   '@oxc-project/types@0.156.0': {}
 
